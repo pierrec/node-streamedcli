@@ -1,0 +1,29 @@
+{
+  "author": "Pierre Curto"
+, "name": "streamedcli"
+, "description": "Turns a command line interface into a stream"
+, "keywords": ["cli","stream"]
+, "version": "0.0.0"
+, "homepage": "http://github.com/pierrec/node-streamedcli"
+, "repository": {
+    "type": "git"
+  , "url": "git://github.com/pierrec/node-streamedcli.git"
+  }
+, "main": "./Cli.js"
+, "bugs": { "url" : "http://github.com/pierrec/node-streamedcli/issues" }
+, "licenses":
+  [ {
+      "type": "MIT"
+    , "url": "http://github.com/pierrec/node-streamedcli/raw/master/LICENSE"
+    }
+  ]
+, "engines": {
+    "node": ">= 0.8"
+  }
+, "dependencies": {
+  }
+, "devDependencies": {
+  }
+, "scripts": {
+  }
+}
