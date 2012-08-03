@@ -26,22 +26,28 @@ function Cli (cmd, args, options) {
 	this._handle = handle
 	this._in = handle.stdin
 
-	handle.on('exit', function () {
-		self.end()
+	var exitMessage = null
+	handle.on('exit', function (code, signal) {
+		if (code !== 0) self.emit( 'error', new Error(exitMessage || '') )
+
+		self.ended = true
+		self.write = self.write_end
 		self._handle = null
 		self._in = null
+		self.emit('end')
 	})
 	handle.stderr.on('data', function (data) {
 		self.emit('error', data)
 	})
 	handle.stdout.on('data', function (data) {
+		exitMessage = data.toString()
 		self.emit('data', data)
 	})
 }
 util.inherits(Cli, Stream)
 
 Cli.prototype.write = function (data) {
-	return this._in.write(data)
+	return data ? this._in.write(data) : true
 }
 
 Cli.prototype.write_end = function () {
@@ -50,12 +56,9 @@ Cli.prototype.write_end = function () {
 }
 
 Cli.prototype.end = function (data) {
-	if (data) this.write(data)
+	this.write(data)
 
-	this.ended = true
-	this.write = this.write_end
-
-	this.emit('end')
+	process.kill( this._handle.pid )
 }
 
 Cli.prototype.pause = function () {

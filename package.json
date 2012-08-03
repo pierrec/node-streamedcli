@@ -3,7 +3,7 @@
 , "name": "streamedcli"
 , "description": "Turns a command line interface into a stream"
 , "keywords": ["cli","stream"]
-, "version": "0.0.0"
+, "version": "0.0.1"
 , "homepage": "http://github.com/pierrec/node-streamedcli"
 , "repository": {
     "type": "git"
